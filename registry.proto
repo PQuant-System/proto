@@ -30,6 +30,12 @@ message SpawnWorkerRequest {
   // Strategy name — used for logging and identification only.
   // The registry does NOT interpret this field; it just labels the child process.
   string strategy_name = 1;
+
+  // Worker type determines which runtime the registry should spawn.
+  //   - "node" (default / empty) → fork hybrid/dist/main.js  (TypeScript worker)
+  //   - "python"                 → spawn python3 hybrid_py    (Python worker)
+  // execd sets this based on the exchange type (e.g. Futu → "python").
+  string worker_type = 2;
 }
 
 message SpawnWorkerResponse {
